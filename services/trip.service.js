@@ -1,13 +1,13 @@
-const model = require("#model/trip.model");
+const model = require("#models/trip.model");
 const storage = require("#lib/storage");
 const { CustomError } = require("#lib/cutomerror");
 
 const getAll = async (query) => {
-	const { result, count } = await _model.getAll(query);
+	const { result, count } = await model.getAll(query);
 	await Promise.all(
 		result.map(async (item) => {
 			if (item.image) {
-				item.image_url = await _storage.getUrlSigned(item.Image);
+				item.image_url = await storage.getUrlSigned(item.Image);
 			}
 		}),
 	);

@@ -1,3 +1,5 @@
+const Joi = require("joi");
+
 const tripBody = {
 	body: Joi.object({
 		title: Joi.string().required().label("Title"),

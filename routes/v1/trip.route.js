@@ -7,7 +7,7 @@ const { datatableValidation, globalValidation, tripValidation } = require("#vali
 router.get(
 	/**
 	 * @swagger
-	 * /v1/trip:
+	 * /v1/trip-tour:
 	 *  get:
 	 *    tags:
 	 *      - Trip and Tour
@@ -29,7 +29,7 @@ router.get(
 router.get(
 	/**
 	 * @swagger
-	 * /v1/trip/{id}:
+	 * /v1/trip-tour/{id}:
 	 *  get:
 	 *    tags:
 	 *      - Trip and Tour
@@ -51,7 +51,7 @@ router.get(
 router.post(
 	/**
 	 * @swagger
-	 * /v1/trip:
+	 * /v1/trip-tour:
 	 *  post:
 	 *    tags:
 	 *      - Trip and Tour
@@ -80,7 +80,7 @@ router.post(
 router.put(
 	/**
 	 * @swagger
-	 * /v1/trip:
+	 * /v1/trip-tour/{id}:
 	 *  put:
 	 *    tags:
 	 *      - Trip and Tour
@@ -102,16 +102,19 @@ router.put(
 	 *      500:
 	 *        description: Internal Server Error
 	 */
-	"/",
+	"/:id",
 	auth.verifyToken,
-	validate(tripValidation.tripBody),
+	validate({
+		...globalValidation.paramString,
+		...tripValidation.tripBody
+	}),
 	(req, res, next) => controller.update(req, res).catch(next),
 );
 
 router.delete(
 	/**
 	 * @swagger
-	 * /v1/trip/{id}:
+	 * /v1/trip-tour/{id}:
 	 *  delete:
 	 *    tags:
 	 *      - Trip and Tour

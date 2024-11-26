@@ -1,4 +1,4 @@
-const service = require("#services/product.service");
+const service = require("#services/trip.service");
 
 const getAll = async (req, res) => {
 	const { query } = req;
@@ -20,20 +20,20 @@ const getById = async (req, res) => {
 
 const insert = async (req, res) => {
     const { body } = req;
-	await service.getById(body);
+	await service.insert(body);
 	return res.json();
 }
 
 const update = async (req, res) => {
     const { params, body } = req;
-	await service.getById(params.id, body);
+	await service.update(params.id, body);
 	return res.json();
 }
 
 
 const remove = async (req, res) => {
     const { params } = req;
-	await service.getById(params.id);
+	await service.remove(params.id);
 	return res.json();
 }
 
